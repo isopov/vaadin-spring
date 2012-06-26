@@ -33,7 +33,7 @@
     <servlet-class>com.vaadin.terminal.gwt.server.ApplicationServlet</servlet-class>
     <init-param>
       <param-name>application</param-name>
-      <param-value>com.navinpeiris.vaadin_spring.VaadinSpringDemoApplication</param-value>
+      <param-value>com.sopovs.moradanen.vaadin.VaadinSpringDemoApplication</param-value>
       <description>Vaadin application class to start</description>
     </init-param>
   </servlet>

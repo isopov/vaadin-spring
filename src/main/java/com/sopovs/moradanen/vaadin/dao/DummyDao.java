@@ -16,73 +16,72 @@ import com.sopovs.moradanen.vaadin.domain.Sector;
 @Component
 public class DummyDao {
 	private final Random r = new Random(228L);
-	private final List<Person> PERSONS = createPersons(r);
-	private final List<Company> COMPANIES = createCompanies(r);
-	private final List<Sector> SECTORS = createSectors(r);
+	private final List<Person> persons = createPersons(r);
+	private final List<Company> companies = createCompanies(r);
+	private final List<Sector> sectors = createSectors(r);
 
-	
 	//Company Dao methods
 	public long countCompanies() {
-		return COMPANIES.size();
+		return companies.size();
 	}
 
 	public List<Company> findAllCompanies() {
-		return new ArrayList<Company>(COMPANIES);
+		return new ArrayList<Company>(companies);
 	}
 
 	public Company findCompany(String id) {
 		if (id == null) {
 			return null;
 		}
-		return COMPANIES.get(Integer.valueOf(id));
+		return companies.get(Integer.valueOf(id));
 	}
 
 	public List<Company> findCompaniesBySector(String sectorId) {
-		return new ArrayList<Company>(SECTORS.get(Integer.valueOf(sectorId))
+		return new ArrayList<Company>(sectors.get(Integer.valueOf(sectorId))
 				.getFocusedCompanies());
 	}
-	
+
 	//Person dao methods
-	public  long countPersons() {
-		return PERSONS.size();
+	public long countPersons() {
+		return persons.size();
 	}
 
 	public List<Person> findAllPersons() {
-		return new ArrayList<Person>(PERSONS);
+		return new ArrayList<Person>(persons);
 	}
 
 	public Person findPerson(String id) {
 		if (id == null) {
 			return null;
 		}
-		return PERSONS.get(Integer.valueOf(id));
+		return persons.get(Integer.valueOf(id));
 	}
 
 	public List<Person> findPersonsByCompany(String companyId) {
-		return new ArrayList<Person>(COMPANIES.get(Integer.valueOf(companyId)).getWorkers());
+		return new ArrayList<Person>(companies.get(Integer.valueOf(companyId)).getWorkers());
 	}
 
 	//Sector dao methods
 	public long countSectors() {
-		return SECTORS.size();
+		return sectors.size();
 	}
 
-	public  List<Sector> findAllSectors() {
-		return new ArrayList<Sector>(SECTORS);
+	public List<Sector> findAllSectors() {
+		return new ArrayList<Sector>(sectors);
 	}
 
 	public Sector findSector(String id) {
 		if (id == null) {
 			return null;
 		}
-		return SECTORS.get(Integer.valueOf(id));
+		return sectors.get(Integer.valueOf(id));
 	}
 
 	public List<Sector> findSectorsByParent(String parentId) {
 		if (parentId == null) {
-			return new ArrayList<Sector>(Collections.singletonList(SECTORS.get(0)));
+			return new ArrayList<Sector>(Collections.singletonList(sectors.get(0)));
 		} else {
-			return new ArrayList<Sector>(SECTORS.get(Integer.valueOf(parentId)).getSubSectors());
+			return new ArrayList<Sector>(sectors.get(Integer.valueOf(parentId)).getSubSectors());
 		}
 //		if (parentId == null) {
 //			return Collections.singletonList(new Sector("0", null, "Sector 0"));
@@ -94,7 +93,7 @@ public class DummyDao {
 //		}
 	}
 
-	private List<Person> createPersons(Random r) {
+	private static List<Person> createPersons(Random r) {
 		List<Person> result = new ArrayList<Person>();
 		String[] firstNames = new String[] { "Ivan", "Peter", "Sidor", "Vasil",
 				"Urij", "Alex" };
@@ -120,7 +119,7 @@ public class DummyDao {
 			com.setFocusedSectors(new ArrayList<Sector>());
 			Set<Person> uniqueWorkers = new HashSet<Person>();
 			for (int j = 0; j < r.nextInt(20); j++) {
-				Person worker = PERSONS.get(r.nextInt(PERSONS.size()));
+				Person worker = persons.get(r.nextInt(persons.size()));
 				worker.getCompanies().add(com);
 				uniqueWorkers.add(worker);
 			}
@@ -141,7 +140,7 @@ public class DummyDao {
 					.add(sec);
 			Set<Company> uniqueCompaniess = new HashSet<Company>();
 			for (int j = 0; j < r.nextInt(20); j++) {
-				Company com = COMPANIES.get(r.nextInt(COMPANIES.size()));
+				Company com = companies.get(r.nextInt(companies.size()));
 				com.getFocusedSectors().add(sec);
 				uniqueCompaniess.add(com);
 			}
